@@ -13,7 +13,13 @@ const userSchema  = new mongoose.Schema({
         required : true,
         min : 5,
         max : 10
+    },
+    favoritePairs: [
+    {
+    from: String,
+    to: String
     }
+    ]
 },{timestamps:true})
 
 const User = mongoose.model('User',userSchema);

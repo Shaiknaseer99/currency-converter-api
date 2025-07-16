@@ -1,0 +1,21 @@
+// in the first step i have implemented the authentication 
+
+// in the second step  need to implement 
+-- convert the currency
+-- history of the currency -- need to create a  schema so the user have different currency converters
+-- users should also save the favorite currency pairs
+-- users should also   get the favorite currency pairs 
+
+// for fetching the currency conversion and the rates 
+-- the main problem is the currency rate like dollar is not constant so as to be compared with all the other  countries
+-- so we require an api which provide us the current conversion rate 
+-- thinking of using the third party api which can give the  conversion rate based on the country
+-- if the user want the reverse conversion we can let the user to change in the frontend based on that we can hit the currency conversion route
+
+
+// currently in the backend after hitting the currency conversion 
+-- i will expect the response as 
+ -- from 
+ -- to 
+ -- amount (which the user has given)
+ -- converted_amount(conversion converted_amount)
