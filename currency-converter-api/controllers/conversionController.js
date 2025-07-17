@@ -97,3 +97,37 @@ exports.getFavoritePairs = async (req, res) => {
     return res.status(500).json({ message: "Internal server error." });
   }
 };
+
+// due to the freeplan i think for historical we can provide start and currencies we want to see the rates at that date 
+// and here the default source is EUR 
+// but if we have upgrade plan we can use the advance endpoints as we are using the free plan 
+
+exports.getHistoricalRates =async(req,res)=>{
+  try{
+     
+    const{ start , currencies} = req.body;
+    const API_KEY = process.env.API_KEY;
+  
+    if( !start || !currencies) return res.status(400).json({message : "from , to ,start and end are required"});
+    
+   const response = await axios.get("https://api.exchangerate.host/historical", {
+      params: {
+        access_key :API_KEY,
+        date: start,
+        currencies : currencies,
+        format  : 1
+      },
+    });
+     
+    if (!response.data.success) {
+      return res.status(500).json({ message: "Failed to fetch historical data", error: response.data.error });
+    }
+    
+     return res.status(200).json({
+      rates: response.data.quotes, 
+    });
+  }catch(err){
+    console.error(err);
+    return res.status(500).json({message:"internal server error"})
+  }
+}
